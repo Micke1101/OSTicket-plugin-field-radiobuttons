@@ -24,7 +24,7 @@ class RadiobuttonsConfig extends PluginConfig {
             'category' => new TextboxField(array(
                 'label' => $__('Choose category'),
                 'hint' => $__('What category do you want the field to appear under.'),
-                'default' => 'Basic Fields',
+                'default' => $__('Basic Fields'),
                 'configuration' => array('size'=>40, 'length'=>60),
             ))
         );
