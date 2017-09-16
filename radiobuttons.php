@@ -9,7 +9,7 @@ class RadioField extends FormField {
     function getConfigurationOptions() {
         return array(
             'choices'  =>  new TextareaField(array(
-                'id'=>1, 'label'=>__('Choices'), 'required'=>false, 'default'=>'',
+                'id'=>1, 'label'=>__('Choices'), 'required'=>true, 'default'=>'',
                 'hint'=>__('List choices, one per line. To protect against spelling changes, specify key:value names to preserve entries if the list item names change'),
                 'configuration'=>array('html'=>false)
             )),
@@ -308,5 +308,33 @@ class RadiobuttonsPlugin extends Plugin {
     function bootstrap() {
         $config = $this->getConfig();
         FormField::$types[$config->get('category')]['radiobutton'] = array(   /* @trans */ 'Radiobuttons', 'RadioField');
+    }
+    
+    function uninstall() {
+        global $ost;
+        $errors = array();
+        $config = $this->getConfig();
+        
+        $fields = DynamicFormField::objects()->filter(array('type' => 'radiobutton'))->all();
+        if(count($fields) > 0){
+            switch($config->get('uninstall-method')){
+                case 'prevent':
+                    $ost->setWarning(sprintf(__('%d instance(s) of radiobuttons remaining.'), count($fields)));
+                    return false;
+                    break;
+                case 'warn':
+                    $ost->alertAdmin(__('Error! Plugin Radiobuttons Field has been uninstalled but is in use!'),
+                        __('This field type has been added to a Form, you will have errors!'),
+                        true);
+                    break;
+                case 'convert':
+                    for($i = 0; $i < count($fields); $i++){
+                        $fields[$i]->set('type', 'choices');
+                        $fields[$i]->save();
+                    }
+                    break;
+            }
+        }
+        return parent::uninstall($errors);
     }
 }

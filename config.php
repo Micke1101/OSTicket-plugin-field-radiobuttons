@@ -26,7 +26,19 @@ class RadiobuttonsConfig extends PluginConfig {
                 'hint' => $__('What category do you want the field to appear under.'),
                 'default' => $__('Basic Fields'),
                 'configuration' => array('size'=>40, 'length'=>60),
-            ))
+            )),
+            'uninstall-method' => new ChoiceField([
+                'label' => $__('Uninstall method'),
+                'required' => false,
+                'hint' => $__('Select what you want the plugin to do when uninstalled.'),
+                'default' => 'convert',
+                'choices' => array(
+                    'convert' => __('Convert radiobuttons to choices'),
+                    'prevent' => __('If radiobuttons remain prevent uninstall'),
+                    'warn' => __('Inform the admin if instances remain'),
+                    'nothing' => __('Just remove the plugin'),
+                )
+            ])
         );
     }
 }

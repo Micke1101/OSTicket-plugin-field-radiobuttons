@@ -1,7 +1,7 @@
 <?php
 return array(
     'id' =>             'field:radiobuttons', # notrans
-    'version' =>        '0.1',
+    'version' =>        '0.2',
     'name' =>           /* trans */ 'Radiobuttons',
     'author' =>         'Micke1101',
     'description' =>    /* trans */ 'Adds the possibility to use radiobuttons in your forms.',
