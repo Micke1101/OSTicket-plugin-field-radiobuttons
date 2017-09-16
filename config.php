@@ -30,5 +30,3 @@ class RadiobuttonsConfig extends PluginConfig {
         );
     }
 }
-
-?>
