@@ -8,5 +8,3 @@ return array(
     'url' =>            'https://github.com/Micke1101/OSTicket-plugin-field-radiobuttons',
     'plugin' =>         'radiobuttons.php:RadiobuttonsPlugin'
 );
-
-?>
